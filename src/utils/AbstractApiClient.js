@@ -1,9 +1,13 @@
 import axios from 'axios'
 import Const from '~/src/const'
 
-const { Time } = Const
+const { TIME } = Const
 
 class AbstractApiClient {
+  constructor(domain) {
+    this.domain = domain
+  }
+
   addHeader(headerName, headerValue) {
     if (this.headers[headerName]) {
       throw new Error('#{this.headers[headerName]} is already set.')
@@ -27,7 +31,7 @@ class AbstractApiClient {
       url: this.domain + path,
       params: params,
       headers: this.headers,
-      timeout: Time.API_TIMEOUT
+      timeout: TIME.API_TIMEOUT
     })
     return response.body
   }
@@ -39,7 +43,7 @@ class AbstractApiClient {
       url: this.domain + path,
       data: body,
       headers: this.headers,
-      timeout: Time.API_TIMEOUT
+      timeout: TIME.API_TIMEOUT
     })
     return response.body
   }
